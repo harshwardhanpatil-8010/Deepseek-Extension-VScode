@@ -1,4 +1,3 @@
-
 import * as vscode from 'vscode';
 import ollama from 'ollama';
 
@@ -46,134 +45,93 @@ function getWebviewContent(): string {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' vscode-resource:;">
-
-        <title>Deepseek Ext</title>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' vscode-resource:;">
+        <title>Deepseek AI Chat</title>
         <style>
-          
-                body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    margin: 0;
-    padding: 24px;
-    background-color: var(--vscode-editor-background);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    color: var(--vscode-foreground);
-}
+            body {
+                font-family: 'Segoe UI', sans-serif;
+                margin: 0;
+                padding: 24px;
+                background-color: var(--vscode-editor-background);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-height: 100vh;
+                color: var(--vscode-foreground);
+            }
 
-.container {
-    background-color: var(--vscode-editor-background);
-    border: 1px solid var(--vscode-widget-border);
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    padding: 24px;
-    width: 100%;
-    max-width: 800px;
-    box-sizing: border-box;
-}
+            .container {
+                background: var(--vscode-editor-background);
+                border: 1px solid var(--vscode-widget-border);
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                padding: 24px;
+                width: 90%;
+                max-width: 800px;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
 
-h1 {
-    font-size: 24px;
-    font-weight: 500;
-    margin-bottom: 24px;
-    color: var(--vscode-foreground);
-}
+            h1 {
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+            }
 
-#prompt {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 12px 16px;
-    border: 1px solid var(--vscode-input-border);
-    border-radius: 4px;
-    margin-bottom: 16px;
-    font-size: 14px;
-    line-height: 1.6;
-    background-color: var(--vscode-input-background);
-    color: var(--vscode-input-foreground);
-    resize: vertical;
-    min-height: 80px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
+            textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid var(--vscode-input-border);
+                border-radius: 6px;
+                font-size: 14px;
+                background: var(--vscode-input-background);
+                color: var(--vscode-input-foreground);
+                resize: none;
+                min-height: 100px;
+            }
 
-#prompt:focus {
-    border-color: var(--vscode-focusBorder);
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
-}
+            button {
+                padding: 12px;
+                border: none;
+                border-radius: 6px;
+                font-size: 14px;
+                background-color: var(--vscode-button-background);
+                color: var(--vscode-button-foreground);
+                cursor: pointer;
+                font-weight: bold;
+                text-transform: uppercase;
+                transition: background 0.2s;
+            }
 
-#response {
-    border: 1px solid var(--vscode-input-border);
-    border-radius: 4px;
-    padding: 16px;
-    min-height: 240px;
-    max-height: 500px;
-    overflow-y: auto;
-    background-color: var(--vscode-editor-background);
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--vscode-editor-foreground);
-    font-family: 'SF Mono', Monaco, Menlo, Courier, monospace;
-    white-space: pre-wrap;
-    margin-bottom: 16px;
-}
+            button:hover {
+                background-color: var(--vscode-button-hoverBackground);
+            }
 
-button {
-    padding: 8px 16px;
-    border: none;
-    background-color: var(--vscode-button-background);
-    color: var(--vscode-button-foreground);
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-    min-width: 120px;
-    text-align: center;
-}
-
-button:hover {
-    background-color: var(--vscode-button-hoverBackground);
-}
-
-button:active {
-    transform: translateY(1px);
-}
-
-button:focus {
-    outline: 2px solid var(--vscode-focusBorder);
-    outline-offset: 2px;
-}
-
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--vscode-scrollbarSlider-background);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--vscode-scrollbarSlider-hoverBackground);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--vscode-scrollbarSlider-activeBackground);
-}
-
+            #response {
+                border: 1px solid var(--vscode-input-border);
+                border-radius: 6px;
+                padding: 16px;
+                background: var(--vscode-editor-background);
+                font-size: 14px;
+                color: var(--vscode-editor-foreground);
+                min-height: 150px;
+                max-height: 400px;
+                overflow-y: auto;
+                white-space: pre-wrap;
+            }
         </style>
     </head>
     <body>
-        <h1>Deepseek for VS Code</h1>
-        <textarea id="prompt" rows="3" placeholder="Ask anything to Deepseek"></textarea><br/>
-        <button id="askBtn">Submit</button><br/>
-        <div id="response"></div>
+        <div class="container">
+            <h1>Deepseek AI Assistant</h1>
+            <textarea id="prompt" placeholder="Ask anything..."></textarea>
+            <button id="askBtn">Send</button>
+            <div id="response"></div>
+        </div>
         <script>
             const vscode = window.acquireVsCodeApi();
-
             document.getElementById('askBtn').addEventListener('click', () => {
                 const text = document.getElementById('prompt').value;
                 vscode.postMessage({ command: 'chat', text });
