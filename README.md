@@ -8,6 +8,11 @@ This extension integrates **Deepseek AI** into VS Code, allowing users to intera
 - Built-in chat panel for easy communication.
 - Lightweight and optimized for performance.
 
+## Compile
+1. `npm run compile`
+2. To convert it to `.vsix` package run `vsce package`.
+3. Test locally using `code --install-extension ./deepseek-0.0.1.vsix`
+
 ## Installation
 1. Download the `.vsix` package (if manually installing).
 2. Open VS Code, go to `Extensions` (Ctrl+Shift+X).
@@ -23,7 +28,6 @@ This extension integrates **Deepseek AI** into VS Code, allowing users to intera
 - `ollama` installed locally.
 - A stable internet connection for AI requests.
 
-## Contributing
-Feel free to open issues or contribute to the development!
+
 
 # Deepseek-Extension-VScode

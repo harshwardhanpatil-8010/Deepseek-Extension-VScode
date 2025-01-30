@@ -1,3 +1,4 @@
+
 import * as vscode from 'vscode';
 import ollama from 'ollama';
 
@@ -49,77 +50,118 @@ function getWebviewContent(): string {
 
         <title>Deepseek Ext</title>
         <style>
-            body {
-    font-family: 'Arial', sans-serif;
+          
+                body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #f4f7fc;
+    padding: 24px;
+    background-color: var(--vscode-editor-background);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    color: var(--vscode-foreground);
 }
 
 .container {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    background-color: var(--vscode-editor-background);
+    border: 1px solid var(--vscode-widget-border);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    padding: 24px;
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     box-sizing: border-box;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    color: var(--vscode-foreground);
 }
 
 #prompt {
     width: 100%;
     box-sizing: border-box;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    line-height: 1.5;
-    background-color: #fafafa;
-    transition: border-color 0.3s ease-in-out;
+    padding: 12px 16px;
+    border: 1px solid var(--vscode-input-border);
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 #prompt:focus {
-    border-color: #007ACC;
+    border-color: var(--vscode-focusBorder);
     outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
 }
 
 #response {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 12px;
-    height: 200px;
+    border: 1px solid var(--vscode-input-border);
+    border-radius: 4px;
+    padding: 16px;
+    min-height: 240px;
+    max-height: 500px;
     overflow-y: auto;
-    background-color: #ffffff;
+    background-color: var(--vscode-editor-background);
     font-size: 14px;
-    color: #555;
-    line-height: 1.5;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-    margin-bottom: 15px;
+    line-height: 1.6;
+    color: var(--vscode-editor-foreground);
+    font-family: 'SF Mono', Monaco, Menlo, Courier, monospace;
+    white-space: pre-wrap;
+    margin-bottom: 16px;
 }
 
 button {
-    padding: 12px 18px;
+    padding: 8px 16px;
     border: none;
-    background-color: #007ACC;
-    color: white;
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
     cursor: pointer;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    width: 100%;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    min-width: 120px;
+    text-align: center;
 }
 
 button:hover {
-    background-color: #005F99;
+    background-color: var(--vscode-button-hoverBackground);
+}
+
+button:active {
+    transform: translateY(1px);
 }
 
 button:focus {
-    outline: none;
+    outline: 2px solid var(--vscode-focusBorder);
+    outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--vscode-scrollbarSlider-background);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--vscode-scrollbarSlider-hoverBackground);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--vscode-scrollbarSlider-activeBackground);
 }
 
         </style>
