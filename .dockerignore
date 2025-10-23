@@ -1,0 +1,46 @@
+# Filename: .dockerignore
+# This file prevents local development files and sensitive information
+# from being copied into the Docker image, resulting in a smaller and more secure image.
+
+# Node.js
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build artifacts
+build
+dist
+.next
+
+# Logs
+logs
+*.log
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor configuration
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Git repository
+.git
+.gitignore
+
+# Test files
+coverage
